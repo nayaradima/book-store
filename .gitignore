@@ -1,0 +1,9 @@
+#environment
+venv/
+
+
+# OS files
+.DS_Store
+
+# SQLite database files
+*.sqlite3
