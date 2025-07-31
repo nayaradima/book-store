@@ -6,7 +6,10 @@ from .models import Book
 #     title = serializer.CharField() --> write the exactly same i wrote in the other file. 
 
 class BookSerializer(serializers.ModelSerializer):
-    published_date = serializers.DateField(format="%d/%m/%Y")
+    # data validation in the format
+    published_date = serializers.DateField(
+        format="%d/%m/%Y",
+        input_formats = ["%d/%m/%Y"])
     
     class Meta:
         model = Book
