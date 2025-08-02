@@ -47,7 +47,7 @@ class BookApiViewTest(APITestCase):
         
     def testCreateInvalidBook(self):
         data = {
-            "title": "", # Required filed (book has to have a title)
+            "title": "", # Required field (book has to have a title)
             "author": "Unknown",
             "isbn": "invalidisbn", # Only numbers and has to be 13 digits
             "published_date": "not a format of date dd-mm-yyyy"

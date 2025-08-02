@@ -1,0 +1,31 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_NAME: "bookstore"
+      DATABASE_USER: "bookstoreuser"
+      DATABASE_PASSWORD: "bookstorepassword"
+      DATABASE_HOST: "db"
+      DEVELOPMENT_MODE: "false"
+      DJANGO_SETTINGS_MODULE: "bookstore.bookstore.settings"
+    depends_on:
+      - db
+
+  # first service is the database
+  db:
+    image: postgres:17.5
+    environment:
+      POSTGRES_DB: "bookstore"
+      POSTGRES_USER: "bookstoreuser"
+      POSTGRES_PASSWORD: "bookstorepassword"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pg_data:
