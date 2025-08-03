@@ -8,43 +8,32 @@ on:
       - main
 
 # Once the event has happened:
-
 jobs:
-
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
       - uses: ./.github/actions/dependency
-          
       - name: Run pytest
         run: pytest
 
-runmigrations:
+  runmigrations:
         runs-on: ubuntu-latest
-
         steps:
         - name: Checkout code
           uses: actions/checkout@v4
-      
         - uses: ./.github/actions/dependency
-      
         - name: Run django migrate
           run: python manage.py migrate
 
-migrations-check:
+  migrations-check:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
       - uses: ./.github/actions/dependency
-          
       - name: Run pytest
         run: pytest
-      
       - name: Run django migrate
         run: python manage.py makemigrations --check
