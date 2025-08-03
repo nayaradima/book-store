@@ -1,0 +1,50 @@
+name: Unit Tests 
+
+# trigger the workflow every time someone send PR into master/main
+# Testing PR now, triggr this workflow:
+on: 
+  pull_request:
+    branches:
+      - main
+
+# Once the event has happened:
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - uses: ./.github/actions/dependency
+          
+      - name: Run pytest
+        run: pytest
+
+runmigrations:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+      
+        - uses: ./.github/actions/dependency
+      
+        - name: Run django migrate
+          run: python manage.py migrate
+
+migrations-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - uses: ./.github/actions/dependency
+          
+      - name: Run pytest
+        run: pytest
+      
+      - name: Run django migrate
+        run: python manage.py makemigrations --check
