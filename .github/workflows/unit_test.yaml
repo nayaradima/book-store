@@ -22,7 +22,7 @@ jobs:
       - name: Run pytest
         run: pytest
 
-runmigrations:
+  runmigrations:
         runs-on: ubuntu-latest
 
         steps:
@@ -34,7 +34,7 @@ runmigrations:
         - name: Run django migrate
           run: python manage.py migrate
 
-migrations-check:
+  migrations-check:
     runs-on: ubuntu-latest
     
     steps:
