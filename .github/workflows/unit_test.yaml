@@ -15,8 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - uses: ./.github/actions/dependency
-      # - name: Run python version
-      #   run: python --version
       - name: Run pytest
         run: pytest
 
