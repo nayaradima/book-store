@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "book-store-chart.fullname" . }}-envs
+  labels:
+    {{- include "book-store-chart.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: pre-install, pre-upgrade
+    helm.sh/hook-weight: "0"
+data:
+    {{ range .Values.environmentVariables }}
+    {{- .name -}}: "{{- .value }}"
+    {{ end }}

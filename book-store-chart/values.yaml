@@ -1,0 +1,46 @@
+
+# how many pods it'll deploy
+replicaCount: 1
+
+
+image:
+  repository: ghcr.io/nayaradima/book-store
+  pullPolicy: Always
+  tag: "main"
+
+
+imagePullSecrets:
+  - name: ghcr-token
+
+nameOverride: ""
+fullnameOverride: ""
+
+service: 
+  type: ClusterIP
+  port: 80
+
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false" # do not redirect ports automatically
+
+
+resources:
+  limits:
+    cpu: 500m #half storage of the CPU
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+loadSecretDatabaseFrom: my-app-secret 
+environmentVariables: 
+  - name: DATABASE_NAME
+    value: books
+  - name: DATABASE_USER
+    value: books
+  - name: DATABASE_HOST
+    value: my-database-service.postgres.svc.cluster.local 
+  - name: DEVELOPMENT_MODE
+    value: "false"
+
+
