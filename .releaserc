@@ -1,0 +1,35 @@
+{
+    "branches": [
+        "main"
+    ],
+    "plugins": [
+        [
+            "@semantic-release/commit-analyzer",
+            {
+                "present": "conventionalcommits"
+            }
+        ],
+        [
+            "@semantic-release/release-notes-generator",
+            {
+                "present": "conventionalcommits"
+            }
+        ],
+        [
+            "@semantic-release/changelog",
+            {
+                "changelogFile": "CHANGELOG.md"
+            }   
+        ],
+        "@semantic-release/github",
+        [
+            "@semantic-release/git",
+            {
+                "assets": [
+                    "CHAGELOG.md"
+                ],
+                "message": "chore(release): ${nextRelease.version} [skip:CI]\n\n${nextRelease.notes}"
+            }
+        ]
+    ]
+}
